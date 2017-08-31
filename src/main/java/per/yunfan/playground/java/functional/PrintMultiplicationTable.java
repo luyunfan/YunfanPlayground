@@ -1,5 +1,6 @@
 package per.yunfan.playground.java.functional;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 
