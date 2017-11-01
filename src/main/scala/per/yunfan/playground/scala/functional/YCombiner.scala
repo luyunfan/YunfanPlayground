@@ -15,7 +15,10 @@ object YCombiner extends App {
   def Y[T](function: (T => T) => (T => T)): (T => T) = function(Y(function))(_)
 
   //计算斐波那契数列测试代码
-  val fibonacci = Y[Int] { f => n => if (n <= 0) 1 else n * f(n - 1) }
-  println(fibonacci(5))
+  val fibonacci = Y[Int] { f => n => if (n == 0) 0 else if (n == 1) 1 else f(n - 2) + f(n - 1) }
+
+  (0 to 5) foreach { i => println(fibonacci(i)) }
+
+  //println(fibonacci(5))
 
 }

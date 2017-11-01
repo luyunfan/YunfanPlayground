@@ -1,14 +1,16 @@
 package per.yunfan.playground.java.functional;
 
+import java.lang.reflect.Field;
 import java.util.function.Consumer;
 
 class List<T> {
-    private T _head;
+
+    private T head;
 
     private List<T> tail;
 
     public List(T head, List<T> tail) {
-        _head = head;
+        this.head = head;
         this.tail = tail;
     }
 
@@ -21,7 +23,7 @@ class List<T> {
 
     public void foreach(Consumer<T> action) {
         if (tail == null) return;
-        action.accept(_head);
+        action.accept(head);
         tail.foreach(action);
     }
 
@@ -34,6 +36,7 @@ class List<T> {
 }
 
 class Nil<T> extends List<T> {
+
     @Override
     public boolean isEmpty() {
         return true;
@@ -45,8 +48,11 @@ class Nil<T> extends List<T> {
 }
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchFieldException {
         List<Integer> list = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         list.foreach(System.out::println);
+        final Field field = List.class.getDeclaredField("tail");
+        System.out.println(field.getGenericType().getTypeName());
+
     }
 }
